@@ -1,0 +1,44 @@
+body {font-family: 'Roboto', sans-serif;}
+.canvas-sidebar {background: #fff;}
+.sidebarDiv .logo {border-bottom: 1px solid rgba(102, 97, 91, 0.3); padding: 9px 0; margin: 0 15px 25px;}
+.sidebarDiv .logo a {color: #66615B; text-transform: uppercase; padding: 4px 0px; display: block; font-size: 18px; font-weight: 400; line-height: 30px;}
+.sidebarDiv .logo a:hover {text-decoration: none;}
+.sidebarDiv .nav li.active > a:before, .off-canvas-sidebar .nav li.active > a:before {border-right: 17px solid #DDDDDD; border-top: 17px solid transparent; border-bottom: 17px solid transparent; content: ""; display: inline-block; position: absolute; right: 0; top: 11px;}
+.sidebarDiv .nav li.active > a:after, .off-canvas-sidebar .nav li.active > a:after {border-right: 17px solid #f4f3ef; border-top: 17px solid transparent; border-bottom: 17px solid transparent; content: ""; display: inline-block; position: absolute; right: -1px; top: 11px;}
+.navbar {border-bottom: 1px solid #DDDDDD; background-color: #f4f3ef;}
+.content-table, .edit-form {font-size: 14px;}
+.content-table .vidthumbnail {width: 90px; height: 70px;}
+.main-panel .btn-sm {font-size: 12px;}
+.sidebarLinks .icons {width: 40px;}
+.ssicons img {width: 25px;}
+.card {border-radius: 6px; box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5); background-color: #FFFFFF; color: #252422; margin-bottom: 20px;}
+.table-title {font-size: 21px; padding: 15px 15px 0;}
+.main-wrapper {background-color: #f4f3ef;}
+.list-group-item.active {background: none; border: none;}
+.list-group-item.active a {color: #EB5E28 !important;}
+.list-group-item a:hover {text-decoration: none;}
+.list-group-item a {font-size: 13px; font-weight: 600;}
+#navbarDropdown {background: none; font-size: 15px; color: #9a9a9a;}
+.nav-link {font-size: 15px; color: #9a9a9a;}
+.navbar-nav > li.show > .dropdown-menu, .dropdown.show .dropdown-menu {transform: translate3d(0px, 0px, 0px);}
+.btn.focus, .btn:focus, .btn:visited {outline: none; box-shadow: none;}
+.processing, .processing:focus, .processing:hover {background-color: #eb5e28; border-color: #eb5e28;}
+.close {display: none;}
+.close span {font-size: 42px; font-weight: 300;}
+.videoPlayer {width: 100%;}
+@media (max-width: 991px) {
+	.canvas-sidebar {display: none;}
+	.off-canvas-sidebar {position: fixed; top: 0; height: 100%; width: 230px; right: 0px; z-index: 1032; visibility: visible; background-color: #fff; overflow-y: visible; border-top: none; text-align: left; padding-right: 0px; padding-left: 0; -webkit-transform: translate3d(230px, 0, 0); -moz-transform: translate3d(230px, 0, 0); -o-transform: translate3d(230px, 0, 0); -ms-transform: translate3d(230px, 0, 0); transform: translate3d(230px, 0, 0); -webkit-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1); -moz-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1); -o-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1); -ms-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1); transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);}
+	.nav-open .wrapper {-webkit-transform: translate3d(-230px, 0, 0); -moz-transform: translate3d(-230px, 0, 0); -o-transform: translate3d(-230px, 0, 0); -ms-transform: translate3d(-230px, 0, 0); transform: translate3d(-230px, 0, 0);}
+	.nav-open .navbar-collapse {-webkit-transform: translate3d(0px, 0, 0); -moz-transform: translate3d(0px, 0, 0); -o-transform: translate3d(0px, 0, 0); -ms-transform: translate3d(0px, 0, 0); transform: translate3d(0px, 0, 0);}
+	.off-canvas-sidebar .nav > li.active > a:before {border-right: none; border-left: 12px solid #DDDDDD; border-top: 12px solid transparent; border-bottom: 12px solid transparent; right: auto; margin-left: 0; left: 0px; top: 14px;}
+	.off-canvas-sidebar .nav > li.active > a:after {border-right: none; border-left: 12px solid #f4f3ef; border-top: 12px solid transparent; border-bottom: 12px solid transparent; right: auto; margin-left: 0; left: -1px; top: 14px;}
+	#bodyClick {height: 100%; width: 100%; position: fixed; opacity: 0; top: 0; left: auto; right: 230px; content: ""; z-index: 9999; overflow-x: hidden;}
+	.content-table {display: block; overflow-x: scroll; white-space: nowrap;}
+}
+@media (min-width: 992px) {
+	.off-canvas-sidebar {display: none !important;}
+}
+@media (min-width: 768px) {
+	
+}
