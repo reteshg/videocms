@@ -1,9 +1,17 @@
 from flask import Flask, abort, request, jsonify
 import json
+
 from video import Video
+from user import User
+import pymysql.cursors
+
+
+
 app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
+
+@app.route('/user/login', methods=['GET','POST'])
 
 @app.route('/user/create', methods=['GET', 'POST'])
 
@@ -12,17 +20,21 @@ app = Flask(__name__)
 def api():
 
     url_array = request.path.split('/')
-    if len(url_array) >= 2:
+    
+    if len(url_array) >= 3:
         module_class = url_array[1]
-        action = url_array[2]
+        action = url_array[2] 
     else:
-        return jsonify({"error": "Illegal invocation."})
+        return jsonify({"status": "200","message": "It works!"})
 
-    try:
-        result = getattr(globals()[module_class.capitalize()](), action)(request.get_json())
-        return prepare_final_return_reuslt(result)
-    except :
-        return jsonify({"status": "200","error": "Illegal invocation."})
+    #try: 
+    result = getattr(globals()[module_class.capitalize()](), action)(request.get_json()) 
+    return prepare_final_return_reuslt(result)
+        
+    '''except Exception as e:
+		
+		#print(e)
+        return jsonify({"status": "200","error": "Illegal invocation."})'''
 
 
 
