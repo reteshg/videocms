@@ -28,15 +28,32 @@ class User:
 		return
         
 	def login(self,req_post):
+		 
 		username = req_post['username']
-		password = req_post['password'] 
+		password = req_post['password']
+		 
 		if(username !="" and password !=""):
 			cur.execute("SELECT COUNT(1) FROM user WHERE user_name = %s", username) # CHECKS IF USERNAME EXSIST
 			row = cur.fetchone()
 			while row is not None:
-				
-				row = cur.fetchone()
-				print(row)
+				#print(row["COUNT(1)"])
+				if (row["COUNT(1)"]==1):
+					cur.execute("SELECT user_pwd,user_id,fname,lname FROM user WHERE user_name = %s;", username) # FETCH THE HASHED PASSWORD	
+					for row in cur.fetchall():
+						 
+						md5hashstr = md5(password.encode())
+						#print(md5hashstr)
+						hexdi = md5hashstr.hexdigest()
+						if hexdi == row["user_pwd"]: 
+							uid = row["user_id"] 
+							resp_data = self.getuser(uid) 
+							return resp_data 
+						else:
+							errormsg = {"error": "Invalid Credential"}
+							return errormsg
+				else:
+					errormsg = {"error": "not exist!"}
+					return errormsg
 			'''if cur.fetchone()[0]:
 				cur.execute("SELECT user_pwd,user_id,fname,lname FROM user WHERE user_name = %s;", username) # FETCH THE HASHED PASSWORD
 				for row in cur.fetchall():
@@ -57,7 +74,7 @@ class User:
 		cur.execute("SELECT fname, lname, email, company_id, channel_ids, user_type_id, status, fb_handle, twt_handle, insta_handle, profile_pic, bio FROM user WHERE user_id = %s;", [uid])
 		#cur.execute("SELECT * FROM user WHERE user_id = %s;", [uid]) 
 		for row in cur.fetchall(): 
-			resp_record = {"firstname": row[0],"lastname": row[1],"email": row[2]}
+			resp_record = {"firstname": row["fname"],"lastname": row["lname"],"email": row["email"]}
 			return resp_record
 	
 	def create(self,post_obj):
