@@ -3,12 +3,12 @@ import json
 from hashlib import md5
 #from config import Manhattanconfig
 #from filename import classname
-from mysql_wrapper import Mysqldb
+from api.helper.mysql_wrapper import Mysqldb
 import pymysql.cursors
 #db = MySQLdb.connect(host="localhost", user="root", passwd="root", db="vodcms")
 connection = pymysql.connect(host="localhost",
                              user="root",
-                             password="root",
+                             password="@bp$123#",
                              db="vodcms",
                              charset='utf8mb4',
                              cursorclass=pymysql.cursors.DictCursor)

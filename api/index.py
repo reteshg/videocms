@@ -1,8 +1,8 @@
 from flask import Flask, abort, request, jsonify
 import json
 
-from video import Video
-from user import User
+from api.models.video import Video
+from api.models.user import User
 import pymysql.cursors
 
 
