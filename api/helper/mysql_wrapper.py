@@ -1,43 +1,35 @@
 import pymysql.cursors
+import json
+
 
 class Mysqldb:
-	
-	error = None
-	host = None
-	user = None
-	pwd = None
-	db = None
-	
-	def __init__(self, host, user, pwd, db):
-		self.host = host
-		self.user = user
-		self.pwd = pwd
-		self.db = db
-		        
-	def query(self,sql):
-		connection = pymysql.connect(host="localhost",
-                             user="root",
-                             password="root",
-                             db="vodcms",
-                             charset='utf8mb4',
-                             cursorclass=pymysql.cursors.DictCursor)
-		try:
-			with connection.cursor() as cursor:
-				# Create a new record
-				sql = "SELECT user_pwd,user_id,fname,lname FROM user WHERE user_name = 'rajendra'"
-				cursor.execute(sql)
 
-				# connection is not autocommit by default. So you must commit to save
-				# your changes.
-				result = cursor.fetchone()
-				print(result)
-			#with connection.cursor() as cursor:
-				# Read a single record
-				#sql = "SELECT `id`, `password` FROM `users` WHERE `email`=%s"
-				#cursor.execute(sql, ('webmaster@python.org',))
-				#result = cursor.fetchone()
-				#print(result)
-		finally:
-				connection.close()
-				return {"response":"try try try2222"}
-		 
+    mysql_config = None
+
+    def __init__(self, config_group):
+        config = None
+        with open('./api/config/config.json') as json_data_file:
+            config = json.load(json_data_file)
+
+        self.mysql_config = config[config_group]
+
+    def query(self, sql):
+        connection = pymysql.connect(host=self.mysql_config['host'],
+                                     user=self.mysql_config['user'],
+                                     password=self.mysql_config['password'],
+                                     db=self.mysql_config['db'],
+                                     charset='utf8mb4',
+                                     cursorclass=pymysql.cursors.DictCursor)
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute(sql)
+                result = cursor.fetchall()
+
+        finally:
+            connection.close()
+            return result
+
+
+
+#ddb_client = Mysqldb('videodb_mysql')
+#print(ddb_client.query("SELECT * FROM user"))

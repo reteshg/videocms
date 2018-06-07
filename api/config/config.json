@@ -1,0 +1,10 @@
+{
+	"videodb_mysql":{
+		"host":"localhost",
+        "user":"root",
+        "password":"@bp$123#",
+        "db":"vodcms",
+        "charset":"utf8mb4",
+        "cursorclass":"pymysql.cursors.DictCursor"
+	}
+}

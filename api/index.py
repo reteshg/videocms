@@ -37,9 +37,9 @@ def api():
         return jsonify({"status": "200","error": "Illegal invocation."})'''
 
 
-
 def prepare_final_return_reuslt(result):
     return jsonify({"status": "200", "result": result})
+
 
 def validate_auth_parameters(post_obj):
     if 'apiKey' in post_obj and 'apiSecret' in post_obj and 'hash' in post_obj:
