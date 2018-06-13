@@ -1,13 +1,20 @@
-from flask import Flask, abort, request, jsonify
-import json
+from flask import Flask, abort, request, jsonify, flash, redirect, url_for
+from werkzeug.utils import secure_filename
+
+import os
 
 from api.models.video import Video
 from api.models.user import User
 import pymysql.cursors
 
 
+UPLOAD_FOLDER = '../uploads/'
+ALLOWED_EXTENSIONS = set(['mp4', 'png', 'jpg', 'jpeg'])
+
 
 app = Flask(__name__)
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/', methods=['GET'])
 
@@ -46,6 +53,30 @@ def validate_auth_parameters(post_obj):
         return True
     else:
         return False
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            return jsonify({"status": "200", "error": "No input file specified!"})
+            #return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            return jsonify({"status": "200", "error": "No file selected."})
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return jsonify({"status": "200", "message": "File uploaded."})
+
+    return jsonify({"status": "200", "error": "Illegal invocation."})
 
 if __name__ == "__main__":
     app.run()
