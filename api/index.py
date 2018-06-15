@@ -61,6 +61,9 @@ def allowed_file(filename):
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
+    request.headers.add('Access-Control-Allow-Origin', '*')
+    request.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    request.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
