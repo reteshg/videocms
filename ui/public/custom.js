@@ -26,9 +26,28 @@ $(document).ready(function() {
 			this.classList.add('active');		
 		}
 		loc = this.innerText;
-		window.location = "/"+loc.toLowerCase();
+		//history.pushState (null, '', '"/"+loc.toLowerCase()');
+		//window.location = "/"+loc.toLowerCase();
 	};
 	for (var i = 0; i < listItems.length; i++) {
     	listItems[i].addEventListener('click', makeactive); 
 	}
+	/*-------------------------Accordion close for Desktop---------------------------*/
+	function adjustCollapseView() {
+		var desktopView = $(document).width();
+		if(desktopView >= "768") {
+			$("#accordion td.crdheader[data-toggle]").attr("data-toggle","");
+			$("#accordion .collapse").removeClass("show").css("height","auto");
+		}else {
+			$("#accordion td.crdheader[data-toggle]").attr("data-toggle","collapse");
+			//$("#accordion .collapse").removeClass("").css("height","0");
+			$("#accordion .collapse:first").addClass("show").css("height","auto");
+		}
+	}
+	$(function() {
+		adjustCollapseView();
+		$(window).on("resize","load", function(){
+			adjustCollapseView();
+		});
+	});
 });
