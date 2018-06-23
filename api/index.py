@@ -1,5 +1,7 @@
 from flask import Flask, abort, request, jsonify, flash, redirect, url_for
 from werkzeug.utils import secure_filename
+from flask_cors import CORS
+from datetime import datetime
 
 import os
 
@@ -13,7 +15,7 @@ ALLOWED_EXTENSIONS = set(['mp4', 'png', 'jpg', 'jpeg'])
 
 
 app = Flask(__name__)
-
+cors = CORS(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/', methods=['GET'])
@@ -61,9 +63,7 @@ def allowed_file(filename):
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
-    request.headers.add('Access-Control-Allow-Origin', '*')
-    request.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-    request.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -76,10 +76,23 @@ def upload_file():
             return jsonify({"status": "200", "error": "No file selected."})
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            today = datetime.today()
+            #need to get company id/name, setting it manhattan by defaults
+            company_code = "manhattan"
+            local_upload_folder = app.config['UPLOAD_FOLDER'] + company_code + "/" + today.strftime('%y') + "/" + today.strftime('%M') + "/" + today.strftime('%d')
+
+            os.makedirs(local_upload_folder)
+
+            file.save(os.path.join(local_upload_folder + "/", filename))
             return jsonify({"status": "200", "message": "File uploaded."})
 
     return jsonify({"status": "200", "error": "Illegal invocation."})
+
+
+def change_dir(directory):
+    if os.path.exists(directory) is False: # (or negate, whatever you prefer for readability)
+        os.makedirs(directory)
+    return
 
 if __name__ == "__main__":
     app.run()

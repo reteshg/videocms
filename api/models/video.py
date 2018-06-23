@@ -6,15 +6,18 @@ from hashlib import md5
 
 class Video:
 
-	collection = None
+    collection = None
 
-	def __init__(self):
-		self.collection = 'videos'
+    def __init__(self):
+        self.collection = 'videos'
 		
-	def get_collection_name(self):
-		return self.collection
+    def get_collection_name(self):
+        return self.collection
     
-	def create(self, post):
-		t = post["username"]
-		return {"usrname":t} 
+    def create(self, post):
+        t = post["username"]
+        return {"usrname":t}
          
+    def upload(self, post, file):
+        t = post["username"]
+        return {"usrname": t}
