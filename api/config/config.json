@@ -1,14 +1,14 @@
 {
 	"videodb_mysql":{
-		"host":"localhost",
-        "user":"root",
-        "password":"@bp$123#",
-        "db":"vodcms",
+		"host":"",
+        "user":"",
+        "password":"",
+        "db":"",
         "charset":"utf8mb4",
         "cursorclass":"pymysql.cursors.DictCursor"
 	},
     "aws":{
-        "api_key": "AKIAI6VVITURZRXMV5YA",
-        "secret": "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"
+        "api_key": "",
+        "secret": ""
     }
 }
