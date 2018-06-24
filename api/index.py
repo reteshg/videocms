@@ -8,11 +8,13 @@ import os
 
 from api.models.video import Video
 from api.models.user import User
+from api.models.media import Media
 import pymysql.cursors
 
 
 UPLOAD_FOLDER = '../uploads/'
 ALLOWED_EXTENSIONS = set(['mp4', 'png', 'jpg', 'jpeg'])
+INPUT_BUCKET = 'manhattan-cdn'
 
 
 app = Flask(__name__)
@@ -85,7 +87,12 @@ def upload_file():
                 os.makedirs(local_upload_folder)
 
             file.save(os.path.join(local_upload_folder + "/", filename))
-            return jsonify({"status": "200", "message": "File uploaded."})
+
+            #file upload to s3
+            media_model = Media('aws')
+            s3_path = media_model.upload_to_s3(local_upload_folder, filename, INPUT_BUCKET, company_code)
+
+            return jsonify({"status": "200", "result":{"message": "File uploaded.","path":s3_path}})
 
     return jsonify({"status": "200", "error": "Illegal invocation."})
 

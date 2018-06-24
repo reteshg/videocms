@@ -8,7 +8,7 @@ class Mysqldb:
 
     def __init__(self, config_group):
         config = None
-        with open('./api/config/config.json') as json_data_file:
+        with open('../api/config/config.json') as json_data_file:
             config = json.load(json_data_file)
 
         self.mysql_config = config[config_group]

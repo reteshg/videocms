@@ -6,5 +6,9 @@
         "db":"vodcms",
         "charset":"utf8mb4",
         "cursorclass":"pymysql.cursors.DictCursor"
-	}
+	},
+    "aws":{
+        "api_key": "AKIAI6VVITURZRXMV5YA",
+        "secret": "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"
+    }
 }
