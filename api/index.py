@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 from flask_cors import CORS
 from datetime import datetime
 
+
 import os
 
 from api.models.video import Video
@@ -79,9 +80,9 @@ def upload_file():
             today = datetime.today()
             #need to get company id/name, setting it manhattan by defaults
             company_code = "manhattan"
-            local_upload_folder = app.config['UPLOAD_FOLDER'] + company_code + "/" + today.strftime('%y') + "/" + today.strftime('%M') + "/" + today.strftime('%d')
-
-            os.makedirs(local_upload_folder)
+            local_upload_folder = app.config['UPLOAD_FOLDER'] + company_code + "/" + today.strftime('%Y') + "/" + today.strftime('%m') + "/" + today.strftime('%d')
+            if not os.path.isdir(local_upload_folder):
+                os.makedirs(local_upload_folder)
 
             file.save(os.path.join(local_upload_folder + "/", filename))
             return jsonify({"status": "200", "message": "File uploaded."})
