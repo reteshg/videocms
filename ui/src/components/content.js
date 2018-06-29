@@ -8,6 +8,7 @@ import cms from '../cms.png';
 import { Link } from 'react-router-dom';
 import Sidebar from './sidebar.js';
 import Header from './header.js';
+import Upload from './upload.js';
 
 const Content = ({ match }) => {
 console.log(match);

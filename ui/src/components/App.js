@@ -7,6 +7,7 @@ import Content from './content.js';
 import Edit from './edit.js';
 import Dashboard from './dashboard.js';
 import Header from './header.js';
+import Upload from './upload.js';
 
 class InnerApp extends Component {
     constructor(props){ 

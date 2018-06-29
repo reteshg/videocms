@@ -6,6 +6,7 @@ import image from '../articleImg.jpg';
 import ReactPlayer from 'react-player';
 import Sidebar from './sidebar.js';
 import Header from './header.js';
+import Upload from './upload.js';
 //import videojs from '../react-videojs/video.js';
 //var Video = require('../src/');
 //import "node_modules/video-react/dist/video-react.css";
